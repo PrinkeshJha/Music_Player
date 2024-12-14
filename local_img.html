@@ -1,0 +1,102 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Storage Example</title>
+</head>
+<body>
+
+    <input type="file" id="imageInput" accept="image/*">
+    <button onclick="saveImage()">Save Image</button>
+    <img id="savedImage" src="" alt="Saved Image">
+
+    <script>
+        function saveImage() {
+            const input = document.getElementById('imageInput');
+            const file = input.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const imageData = e.target.result;
+                    localStorage.setItem('userImage', imageData);
+
+                    // Display the saved image
+                    document.getElementById('savedImage').src = imageData;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Load the image from local storage on page load
+        const savedImageData = localStorage.getItem('userImage');
+        if (savedImageData) {
+            document.getElementById('savedImage').src = savedImageData;
+        }
+    </script>
+
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Storage Multiple Images Example</title>
+</head>
+<body>
+
+    <input type="file" id="imageInput" accept="image/*">
+    <button onclick="saveImage()">Save Image</button>
+    
+    <ul id="imageList"></ul>
+
+    <script>
+        function saveImage() {
+            const input = document.getElementById('imageInput');
+            const file = input.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const imageData = e.target.result;
+
+                    // Retrieve the existing list of images from localStorage
+                    const existingImages = JSON.parse(localStorage.getItem('userImages')) || [];
+
+                    // Add the new image to the list
+                    existingImages.push(imageData);
+
+                    // Save the updated list back to localStorage
+                    localStorage.setItem('userImages', JSON.stringify(existingImages));
+
+                    // Update the displayed list of images
+                    displayImageList(existingImages);
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function displayImageList(images) {
+            const listContainer = document.getElementById('imageList');
+            listContainer.innerHTML = '';
+
+            images.forEach((imageData, index) => {
+                const listItem = document.createElement('li');
+                const imageElement = document.createElement('img');
+                imageElement.src = imageData;
+                imageElement.alt = `Image ${index + 1}`;
+                listItem.appendChild(imageElement);
+                listContainer.appendChild(listItem);
+            });
+        }
+
+        // Load the existing list of images from localStorage on page load
+        const savedImages = JSON.parse(localStorage.getItem('userImages')) || [];
+        displayImageList(savedImages);
+    </script>
+
+</body>
+</html>

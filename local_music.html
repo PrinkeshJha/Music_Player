@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Storage Example</title>
+</head>
+<body>
+
+    <input type="file" id="musicInput" accept="audio/*">
+    <button onclick="saveMusic()">Save Music</button>
+    <audio controls id="savedMusic">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        function saveMusic() {
+            const input = document.getElementById('musicInput');
+            const file = input.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const musicData = e.target.result;
+                    localStorage.setItem('userMusic', musicData);
+
+                    // Display the saved music
+                    document.getElementById('savedMusic').src = musicData;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Load the music from local storage on page load
+        const savedMusicData = localStorage.getItem('userMusic');
+        if (savedMusicData) {
+            document.getElementById('savedMusic').src = savedMusicData;
+        }
+    </script>
+
+</body>
+</html>

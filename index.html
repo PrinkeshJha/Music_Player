@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music_Player</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+
+<body>
+    <nav>
+        <a href="">
+            <img src="IMG/Iron_Gaming_MK50.jpg" alt="Logo">
+        </a>
+
+        <button>
+            Add Local Musicz`
+        </button>
+    </nav>
+
+
+    <div class="outer-container">
+        <div class="inner-container">
+            <div class="player-info">
+                <div class="img-cover">
+                    <img id="cover-img" src="IMG/Sometimes wallpaper.jpeg" alt="Album Cover">
+                </div>
+
+                <div class="song-details">
+                    <p class="song-title">Sometimes</p>
+                </div>
+
+            </div>
+
+            <div class="box_2">
+
+                <div class="audio-controls">
+                    
+                    <button class="control-btn" id="prevBtn">
+                        <i id="pb" class="ri-skip-back-fill"></i>   <!-- Previous Button -->
+                    </button>
+                    <button class="control-btn" id="playPauseBtn">
+                        <i id="ppb" class="ri-play-mini-fill"></i>   <!-- Play Pause Button -->
+                    </button>
+                    <button class="control-btn" id="nextBtn">
+                        <i id="nb" class="ri-skip-forward-fill"></i>   <!-- Next Button -->
+                    </button>
+                    <button class="control-btn" id="repeatBtn">
+                        <i id="rb" class="ri-repeat-2-line"></i>   <!-- Repeat Button -->
+                    </button>
+
+                    <div class="volume-container">
+                        
+                        <button class="control-btn" id="volumeBtn">
+                            <i id="vb" class="ri-volume-up-fill"></i>
+                        </button>
+                    
+                        <input type="range" id="volumeSlider" class="volume-slider" min="0" max="100" value="50">
+                    
+                    </div>
+                </div>
+            
+                <div class="parent">
+                    <div class="slider-container">
+                        <!-- <input type="range" id="seekBar" value="0"> -->
+                        <input type="range" id="seekBar" value="0" step="0.01" onclick="seekSong()">
+                        
+                    </div>
+                    
+                    <div class="time-display">
+                        <span id="currentTime">0:00</span>
+                        <span>/</span>
+                        <span id="duration">0:00</span>
+                    </div>
+                    
+                    <audio id="audioPlayer" controls onended="playNext()">
+                        <source src="Audio/Sometimes.mp3" type="audio/mp3"> <!-- Changed -->
+                    </audio>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
